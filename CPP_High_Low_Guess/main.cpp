@@ -14,22 +14,38 @@ const int MAX_NUMBER_OF_GUESSES = 5;
 const int MAX_NUMBER = 100;
 const int MIN_NUMBER = 1;
 
+// Allows the user to input a single character that is within the allowed range
+char get_char(const string valid_chars) {
+	string user_in;
+	int length; // size of the user_in
+	while (true) {
+		cin >> user_in;
+		length = user_in.size();
+		if (length > 1) {
+			cout << "Please just enter 1 character: ";
+		}
+		else {
+			break;
+		}
+	}
+	return user_in[0];
+}
+
 // Allows the user to input a guess, validates the inputed data
-int get_guess() {
+int get_guess(const string valid_chars) {
 	cout << "Please make a guess between " << MIN_NUMBER << " - " << MAX_NUMBER << ": ";
 	string user_in;
-	string valid_chars = "0123456789";
-	int lenght; // size of the user in string
+	int length; // size of the user in string
 	bool all_num_flag;
 	int user_num;
 	// Infinite loop to help ensure the correct data is gathered
 	while (true) {
 		cin >> user_in;
-		lenght = user_in.size();
+		length = user_in.size();
 		all_num_flag = true;
 
 		// Checking to ensure each character of the string is part of the valid set
-		for (int i = 0; i < lenght; i++) {
+		for (int i = 0; i < length; i++) {
 			if (valid_chars.find(user_in[i]) == string::npos) {
 				cout << "Please only enter interger numbers, no decimals, no characters: ";
 				all_num_flag = false;
@@ -64,7 +80,7 @@ int main() {
 
 		// Infinite loop to get guesses, breaks when the user has maxed out the number of guesses they have
 		while (true) {
-			user_guess = get_guess();
+			user_guess = get_guess("0123456789");
 			user_guesses_made++;
 			if (user_guess == rand_num) {
 				cout << "That's correct!! You Win!!!!!" << endl;
@@ -84,7 +100,7 @@ int main() {
 		}
 
 		cout << "Would you like to continue?(y/n): ";
-		cin >> user_input;
+		user_input = get_char("yn");
 		if (user_input == 'y') {
 			continue;
 		}
