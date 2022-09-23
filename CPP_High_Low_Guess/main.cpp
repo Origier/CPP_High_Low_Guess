@@ -11,6 +11,8 @@
 using namespace std;
 
 const int MAX_NUMBER_OF_GUESSES = 5;
+
+// Make sure the minimum number is lower than the maximum number
 const int MAX_NUMBER = 100;
 const int MIN_NUMBER = 1;
 
